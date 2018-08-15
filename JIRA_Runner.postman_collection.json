@@ -1,0 +1,212 @@
+{
+	"info": {
+		"_postman_id": "2a0fc9b2-c0b2-4cae-832d-7c43875e68e8",
+		"name": "JIRA_Runner",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "040de9a1-d2c3-41ef-bdeb-eda07efc8eea",
+			"name": "Issue_Cycle",
+			"item": [
+				{
+					"_postman_id": "a0167d5e-4e77-447d-adb1-7a2331f2d9ff",
+					"name": "create_issue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e02a3f94-cc92-44a6-be27-f48e011f43d9",
+								"type": "text/javascript",
+								"exec": [
+									"pm.response.json();",
+									"var json = pm.response.json();",
+									"//console.log(json);",
+									"",
+									"console.log(json.key);",
+									"",
+									"pm.globals.set(\"issue_id\",json.key);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"fields\":\n\t{\n\t\t\"project\":\n\t\t{\n\t\t\t\"key\":\"LEAR\"\n\t\t},\n\t\t\"summary\": \"creating issue with POST request to check the XML as output\",\n\t\t\"description\": \"test 2\",\n\t\t\"issuetype\":\n\t\t{\n\t\t\t\"name\":\"Bug\"\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "https://learningwebservices.atlassian.net/rest/api/2/issue/",
+							"protocol": "https",
+							"host": [
+								"learningwebservices",
+								"atlassian",
+								"net"
+							],
+							"path": [
+								"rest",
+								"api",
+								"2",
+								"issue",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "62d72d61-0bb4-453c-aea3-48f03c0bf3cb",
+					"name": "update_issue",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"fields\":\n\t{\n\t\t\"project\":\n\t\t{\n\t\t\t\"key\":\"LEAR\"\n\t\t},\n\t\t\"summary\": \"updating the issue & issue with POST request\",\n\t\t\"description\": \"updating the description using PUT\",\n\t\t\"issuetype\":\n\t\t{\n\t\t\t\"name\":\"Bug\"\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "https://learningwebservices.atlassian.net/rest/api/2/issue/{{issue_id}}",
+							"protocol": "https",
+							"host": [
+								"learningwebservices",
+								"atlassian",
+								"net"
+							],
+							"path": [
+								"rest",
+								"api",
+								"2",
+								"issue",
+								"{{issue_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "64969594-d036-48f1-8375-5db77926955b",
+					"name": "issue_attachment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Atlassian-Token",
+								"value": "no-check"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "C://Users//Vionth//Desktop//WebServices//webservices_notes.txt",
+									"sessionValue": {
+										"0": {}
+									},
+									"type": "file"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://learningwebservices.atlassian.net/rest/api/2/issue/{{issue_id}}/attachments",
+							"protocol": "https",
+							"host": [
+								"learningwebservices",
+								"atlassian",
+								"net"
+							],
+							"path": [
+								"rest",
+								"api",
+								"2",
+								"issue",
+								"{{issue_id}}",
+								"attachments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "5ef5ce4d-26e8-4f65-bc60-78352e3dab69",
+					"name": "delete_issue",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "https://learningwebservices.atlassian.net/rest/api/2/issue/{{issue_id}}",
+							"protocol": "https",
+							"host": [
+								"learningwebservices",
+								"atlassian",
+								"net"
+							],
+							"path": [
+								"rest",
+								"api",
+								"2",
+								"issue",
+								"{{issue_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "vinoece27",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "vinothkumar.sivaraman444@outlook.com",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "a95f869a-ab0e-4022-a9ab-fd32c75c03ec",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e78e0298-ed09-4127-a123-d7276875a90e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
